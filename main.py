@@ -34,7 +34,12 @@ metrics_client = statsd.StatsClient(host=METRICS_HOST, port=METRICS_PORT)
 
 
 @metrics_client.timer('post_analyse')
-@app.post("/analyse/")
+@app.post(
+    "/analyse/",
+    tags=["analysis"],
+    summary="Analyses the inputted text",
+    description="Returns a list containing the sentences from the input, with a label attributed to each."
+)
 async def post_analyse(request: ReviewSentenceRequest):
     results = []
 

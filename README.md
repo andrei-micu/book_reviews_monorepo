@@ -17,5 +17,7 @@ The data piepline is a simple Python script that:
 ## API
 The API is [built](build.bat) and [deployed](deploy.bat) using Docker.
 
+The Swagger UI can be accessed at http://127.0.0.1:8080/docs#/
+
 There is also a load test in place for the endpoint, [run_load_test.bat](run_load_test.bat), which builds and instantiates everything.
 Access the Locust interface from the link outputted in the console, once everything has finished loading.
