@@ -1,0 +1,6 @@
+textblob
+uvicorn
+fastapi
+pydantic
+sentence-splitter
+locust
