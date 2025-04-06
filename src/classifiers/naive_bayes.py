@@ -21,9 +21,9 @@ class NaiveBayes:
             self._classifier.update(batch)
             i = i + batch_size
 
-    def classify(self, text: str) -> list[(str, str)]:
+    def classify(self, text: str) -> list[ReviewSentence]:
         blob = TextBlob(text, classifier=self._classifier)
         return [
-            (sentence.string, sentence.classify())
+            ReviewSentence(sentence.string, sentence.classify())
             for sentence in blob.sentences
         ]

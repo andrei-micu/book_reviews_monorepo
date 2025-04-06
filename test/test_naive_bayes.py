@@ -24,7 +24,7 @@ class TestNaiveBayes(unittest.TestCase):
     def test_classify_sentence(self):
         self.assertEqual(
             self.unit.classify("Another test sentence"),
-            [('Another test sentence', 'POSITIVE')]
+            [ReviewSentence('Another test sentence', 'POSITIVE')]
         )
 
     def test_classify_empty_string(self):
