@@ -2,7 +2,8 @@ import random
 
 from locust import HttpUser, between, task
 
-from src.storage.reviewed_sentences_store import ReviewedSentencesStore
+from src.store.reviewed_sentences_store import ReviewedSentencesStore
+
 
 class AnalyseApiUser(HttpUser):
     wait_time = between(5, 15)
@@ -14,7 +15,8 @@ class AnalyseApiUser(HttpUser):
 
     @task
     def analyse(self):
-        sentence = self.reviewed_sentences[random.randint(0, len(self.reviewed_sentences))]
-        self.client.post("/analyse", {
+        random_sentence_index = random.randint(0, len(self.reviewed_sentences))
+        sentence = self.reviewed_sentences[random_sentence_index].sentence
+        self.client.post("/analyse/", json={
             "text": sentence
         })
