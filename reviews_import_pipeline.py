@@ -19,7 +19,6 @@ def read_reviews(file_path: str) -> list[dict]:
         lines = file.readlines()
         return [json.loads(line) for line in lines]
 
-
 def extract_review_sentences(
         reviews: list[dict],
         rating_baseline: float

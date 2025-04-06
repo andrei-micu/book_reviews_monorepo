@@ -14,7 +14,6 @@ logger = logging.getLogger()
 
 
 class TestReviewSentencesStore(unittest.TestCase):
-
     file_path = "./test_review_sentences.json"
 
     def setUp(self):
@@ -41,4 +40,3 @@ class TestReviewSentencesStore(unittest.TestCase):
             self.unit.read_review_sentences(),
             sentences
         )
-

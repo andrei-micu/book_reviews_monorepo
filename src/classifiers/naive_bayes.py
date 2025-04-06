@@ -5,8 +5,19 @@ from src.model.review_sentence import ReviewSentence
 
 
 class NaiveBayes:
+    """Classifier that uses the Naive Bayes algorithm to label review sentences
+
+    It's initialized using a set of sentences already labeled
+    """
 
     def __init__(self, logger, review_sentences: list[ReviewSentence], batch_size: int):
+        """Initializes the instance with a set of labeled sentences
+
+        Args:
+          logger: the logger instance
+          review_sentences: the list of labeled sentences
+          batch_size: the amount of sentences to process at a time when training
+        """
         self._classifier = NaiveBayesClassifier([])
         training_data = [
             (review_sentence.sentence, review_sentence.polarity)
@@ -22,6 +33,14 @@ class NaiveBayes:
             i = i + batch_size
 
     def classify(self, text: str) -> list[ReviewSentence]:
+        """Classifies the input text. The input may contain multiple sentences.
+        Each sentence is attributed a label.
+
+        Args:
+          text: the text to process and classify
+        Returns:
+          A list of labeled sentences, with one of the polarities from the training set.
+        """
         blob = TextBlob(text, classifier=self._classifier)
         return [
             ReviewSentence(sentence.string, sentence.classify())

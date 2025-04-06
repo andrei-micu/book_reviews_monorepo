@@ -32,6 +32,7 @@ naive_bayes = NaiveBayes(
 app = FastAPI()
 metrics_client = statsd.StatsClient(host=METRICS_HOST, port=METRICS_PORT)
 
+
 @metrics_client.timer('post_analyse')
 @app.post("/analyse/")
 async def post_analyse(request: ReviewSentenceRequest):

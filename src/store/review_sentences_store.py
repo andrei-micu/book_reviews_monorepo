@@ -6,8 +6,16 @@ from src.model.review_sentence import ReviewSentence
 
 
 class ReviewSentencesStore:
+    """A DAO-style class for storing and retrieving review sentences.
+
+    It stores the sentences in a JSON file on the local filesystem.
+    """
 
     def __init__(self, file_path = "./review_sentences.json"):
+        """
+        Args:
+          file_path: an optional file path for storing the sentences.
+        """
         self.file_path = file_path
         if not os.path.exists(self.file_path):
             with open(self.file_path, 'w'):
