@@ -5,7 +5,7 @@ from fastapi import FastAPI, HTTPException
 
 from src.classifiers.naive_bayes import NaiveBayes
 from src.model.api.review_sentence_request import ReviewSentenceRequest
-from src.storage.reviewed_sentences_store import ReviewedSentencesStore
+from src.store.reviewed_sentences_store import ReviewedSentencesStore
 
 logging.basicConfig(
     level=logging.INFO,

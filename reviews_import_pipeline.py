@@ -5,7 +5,7 @@ from textblob import TextBlob
 
 from src.constants.constants import polarity
 from src.model.reviewed_sentence import ReviewedSentence
-from src.storage.reviewed_sentences_store import ReviewedSentencesStore
+from src.store.reviewed_sentences_store import ReviewedSentencesStore
 
 logging.basicConfig(
     level=logging.INFO,
