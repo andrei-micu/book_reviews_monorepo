@@ -1,5 +1,5 @@
-import unittest
 import logging
+import unittest
 
 from src.classifiers.naive_bayes import NaiveBayes
 from src.model.reviewed_sentence import ReviewedSentence
@@ -12,7 +12,7 @@ logging.basicConfig(
 logger = logging.getLogger()
 
 
-class TestAddFunction(unittest.TestCase):
+class TestNaiveBayes(unittest.TestCase):
 
     def setUp(self):
         self.unit = NaiveBayes(
@@ -26,3 +26,13 @@ class TestAddFunction(unittest.TestCase):
             self.unit.classify("Another test sentence"),
             [('Another test sentence', 'POSITIVE')]
         )
+
+    def test_classify_empty_string(self):
+        self.assertEqual(
+            self.unit.classify(""),
+            []
+        )
+
+    def test_classify_number(self):
+        with self.assertRaises(TypeError):
+            self.unit.classify(55)
