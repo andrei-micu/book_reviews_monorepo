@@ -1,6 +1,7 @@
 textblob
 uvicorn
 fastapi
+statsd-telegraf
 pydantic
 sentence-splitter
 locust

@@ -1,10 +1,11 @@
 import logging
 
+import statsd
+from fastapi import FastAPI, HTTPException
+
 from src.classifiers.naive_bayes import NaiveBayes
 from src.model.api.review_sentence_request import ReviewSentenceRequest
 from src.storage.reviewed_sentences_store import ReviewedSentencesStore
-
-from fastapi import FastAPI, HTTPException
 
 logging.basicConfig(
     level=logging.INFO,
@@ -16,6 +17,8 @@ logger = logging.getLogger()
 # In a cloud environment, these values will be loaded from environment variables (os.getenv(...))
 TRAINING_BATCH_SIZE = 1000
 TRAINING_SET_LIMIT = 2000
+METRICS_HOST = "0.0.0.0"
+METRICS_PORT = 8125
 
 reviewed_sentences_store = ReviewedSentencesStore()
 reviewed_sentences = reviewed_sentences_store.read_reviewed_sentences()
@@ -27,8 +30,9 @@ naive_bayes = NaiveBayes(
 )
 
 app = FastAPI()
+metrics_client = statsd.StatsClient(host=METRICS_HOST, port=METRICS_PORT)
 
-
+@metrics_client.timer('post_analyse')
 @app.post("/analyse/")
 async def post_analyse(request: ReviewSentenceRequest):
     results = []
