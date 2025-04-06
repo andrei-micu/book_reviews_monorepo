@@ -4,8 +4,8 @@ import logging
 from textblob import TextBlob
 
 from src.constants.constants import polarity
-from src.model.reviewed_sentence import ReviewedSentence
-from src.store.reviewed_sentences_store import ReviewedSentencesStore
+from src.model.review_sentence import ReviewSentence
+from src.store.review_sentences_store import ReviewSentencesStore
 
 logging.basicConfig(
     level=logging.INFO,
@@ -20,10 +20,10 @@ def read_reviews(file_path: str) -> list[dict]:
         return [json.loads(line) for line in lines]
 
 
-def extract_reviewed_sentences(
+def extract_review_sentences(
         reviews: list[dict],
         rating_baseline: float
-) -> list[ReviewedSentence]:
+) -> list[ReviewSentence]:
     review_sentences = []
     for review in reviews:
         extracted_sentences = (
@@ -31,7 +31,7 @@ def extract_reviewed_sentences(
                 extract_sentences(review["text"])
         )
         review_sentences = review_sentences + list(map(
-            lambda extracted_sentence: ReviewedSentence(
+            lambda extracted_sentence: ReviewSentence(
                 sentence=extracted_sentence,
                 polarity=rating_to_polarity(review["rating"], rating_baseline)
             ),
@@ -57,8 +57,8 @@ def main(
 ):
     logger.info("Importing reviews...")
     reviews = read_reviews(file_path)
-    review_sentences = extract_reviewed_sentences(reviews, rating_baseline)
-    ReviewedSentencesStore().write_reviewed_sentences(review_sentences)
+    review_sentences = extract_review_sentences(reviews, rating_baseline)
+    ReviewSentencesStore().write_review_sentences(review_sentences)
     logger.info("Imported reviews successfully!")
 
 

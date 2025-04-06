@@ -1,16 +1,16 @@
 from textblob.classifiers import NaiveBayesClassifier
 from textblob import TextBlob
 
-from src.model.reviewed_sentence import ReviewedSentence
+from src.model.review_sentence import ReviewSentence
 
 
 class NaiveBayes:
 
-    def __init__(self, logger, reviewed_sentences: list[ReviewedSentence], batch_size: int):
+    def __init__(self, logger, review_sentences: list[ReviewSentence], batch_size: int):
         self._classifier = NaiveBayesClassifier([])
         training_data = [
-            (reviewed_sentence.sentence, reviewed_sentence.polarity)
-            for reviewed_sentence in reviewed_sentences
+            (review_sentence.sentence, review_sentence.polarity)
+            for review_sentence in review_sentences
         ]
 
         i = 0

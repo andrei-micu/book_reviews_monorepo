@@ -2,7 +2,7 @@ import logging
 import unittest
 
 from src.classifiers.naive_bayes import NaiveBayes
-from src.model.reviewed_sentence import ReviewedSentence
+from src.model.review_sentence import ReviewSentence
 
 logging.basicConfig(
     level=logging.INFO,
@@ -17,7 +17,7 @@ class TestNaiveBayes(unittest.TestCase):
     def setUp(self):
         self.unit = NaiveBayes(
             logger,
-            reviewed_sentences=[ReviewedSentence("Test sentence.", "POSITIVE")],
+            review_sentences=[ReviewSentence("Test sentence.", "POSITIVE")],
             batch_size=1
         )
 

@@ -5,7 +5,7 @@ from fastapi import FastAPI, HTTPException
 
 from src.classifiers.naive_bayes import NaiveBayes
 from src.model.api.review_sentence_request import ReviewSentenceRequest
-from src.store.reviewed_sentences_store import ReviewedSentencesStore
+from src.store.review_sentences_store import ReviewSentencesStore
 
 logging.basicConfig(
     level=logging.INFO,
@@ -20,12 +20,12 @@ TRAINING_SET_LIMIT = 2000
 METRICS_HOST = "0.0.0.0"
 METRICS_PORT = 8125
 
-reviewed_sentences_store = ReviewedSentencesStore()
-reviewed_sentences = reviewed_sentences_store.read_reviewed_sentences()
+review_sentences_store = ReviewSentencesStore()
+review_sentences = review_sentences_store.read_review_sentences()
 
 naive_bayes = NaiveBayes(
     logger,
-    reviewed_sentences[0: TRAINING_SET_LIMIT],
+    review_sentences[0: TRAINING_SET_LIMIT],
     batch_size=TRAINING_BATCH_SIZE
 )
 

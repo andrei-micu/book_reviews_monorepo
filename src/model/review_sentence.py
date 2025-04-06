@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
 @dataclass
-class ReviewedSentence:
+class ReviewSentence:
     sentence: str
     polarity: str
